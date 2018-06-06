@@ -1,3 +1,5 @@
+import gridgen
+
 def plrChoose(grid, whichOne):
     if whichOne == True:
         usr = input("P1: Choose an empty spot: ")
@@ -19,18 +21,30 @@ def plrChoose(grid, whichOne):
             print("That spot is already taken!")
 
 def checkGrid(grid):
-    spots = len(grid) * len(grid[0])
-    emptySpots = 0
-    xs = 0
-    os = 0
-    for i in grid:
-        for j in i:
-            if j == " ":
-                emptySpots += 1
-            elif j == "x":
-                xs += 1
-            elif j == "o":
-                os += 1
-    if emptySpots == 0:
+    ln = len(grid)   # Variable to store the length of the grid
+    rotGrid = gridgen.rotateGrid(grid) # Preparing the rotated grid, to check on the vertical lines
+    for j in range(ln):
+        if grid[j].count("x") == ln:  # Here, the function checks the lines, first horizontal, then the vertical, each for both players
+            print("Player 1 wins!")
+            return True
+        if grid[j].count("o") == ln:
+            print("Player 2 wins!")
+            return True
+        if rotGrid[j].count("x") == ln:
+            print("Player 1 wins!")
+            return True
+        if rotGrid[j].count("o") == ln:
+            print("Player 2 wins!")
+            return True
+    if (grid[0][0] and grid[1][1] and grid[2][2]) == 'x':
+        print("Player 1 wins!")
         return True
-    
+    if (grid[2][0] and grid[1][1] and grid[0][2]) == 'x':
+        print("Player 1 wins!")
+        return True
+    if (grid[0][0] and grid[1][1] and grid[2][2]) == 'o':
+        print("Player 2 wins!")
+        return True
+    if (grid[2][0] and grid[1][1] and grid[0][2]) == 'o':
+        print("Player 2 wins!")
+        return True
