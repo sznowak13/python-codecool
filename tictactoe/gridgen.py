@@ -18,3 +18,9 @@ def printGrid(grid):
                 print('---', end='')
             print('')
 
+def rotateGrid(grid):
+    grid2 = getGrid(len(grid))
+    for i in range(len(grid2)):
+        for j in range(len(grid2[i])):
+            grid2[i][j] = grid[j][i]
+    return grid2
