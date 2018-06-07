@@ -24,5 +24,7 @@ while not gameOver and not time == 0:
     gridgen.printGrid(newGrid)
     gameOver = userinput.checkGrid(newGrid)
     time -= 1
-
+    
+if time == 0:
+    print("Draw!")
 print("G A M E  O V E R")
